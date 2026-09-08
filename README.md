@@ -1,10 +1,5 @@
 # MiPhantLibs
 
-<!-- Badge opcional para deixar claro visualmente -->
-![Status](https://img.shields.io/badge/status-arquivado--archived-red.svg)
-
-> **Aviso importante:** Este sistema foi **oficialmente arquivado** e não receberá mais atualizações, correções de bugs ou suporte para novas versões.
-
 MiPhantLibs is a library that makes desktop system development easier using MiPhant.
 
 ## Features
