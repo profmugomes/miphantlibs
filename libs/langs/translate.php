@@ -1,12 +1,9 @@
 <?php
-// Copyright (C) 2025-2026 Murilo Gomes Julio
-// SPDX-License-Identifier: LGPL-2.1-only
-
-// Site: https://youtube.com/@mugomesoficial
+// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
+// SPDX-License-Identifier: MIT
 
 namespace MiPhantLibs\langs;
 
-use MiPhantLibs\system\env;
 use MiPhantLibs\system\server;
 
 class translate
@@ -16,15 +13,21 @@ class translate
     public function __construct()
     {
         $server = new server();
-        $env = new env();
+        $lang = $_ENV['MIPHANT_LANG'] ?? 'en';
+        $langsDir = $server->documentroot() . '/langs';
 
-        $miLangPath = sprintf('%s/langs/%s.json', $server->documentroot(), $env->lang());
+        // Cadeia de fallback: "pt-br" → pt-br.json → pt.json → en.json
+        $candidates = [$lang];
+        if (str_contains($lang, '-')) {
+            $candidates[] = explode('-', $lang)[0];
+        }
+        $candidates[] = 'en';
 
-        if (file_exists($miLangPath)) {
-            $this->miLang = json_decode(file_get_contents($miLangPath), true);
-        } else {
-            if (file_exists(dirname(__FILE__, 4) . '/lang/en.json')) {
-                $this->miLang = json_decode(file_get_contents($server->documentroot() . '/lang/en.json'), true);
+        foreach ($candidates as $candidate) {
+            $path = $langsDir . '/' . $candidate . '.json';
+            if (file_exists($path)) {
+                $this->miLang = json_decode(file_get_contents($path), true) ?? [];
+                break;
             }
         }
     }

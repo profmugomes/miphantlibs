@@ -1,8 +1,6 @@
 <?php
-// Copyright (C) 2025-2026 Murilo Gomes Julio
-// SPDX-License-Identifier: LGPL-2.1-only
-
-// Site: https://youtube.com/@mugomesoficial
+// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
+// SPDX-License-Identifier: MIT
 
 namespace MiPhantLibs\app;
 
@@ -107,17 +105,16 @@ class functions
         $this->clean();
     }
 
-    public function newWindow(string $url, int $width = 800, int $height = 600, bool $resizable = true, bool $frame = true, bool $menu = false, bool $hide = false) {
+    public function newWindow(string $url, int $width = 800, int $height = 600, bool $resizable = true, bool $frame = true, bool $hide = false, string $menu = 'menu') {
         $sResizable = ($resizable) ? 'true': 'false';
         $sFrame = ($frame) ? 'true' : 'false';
-        $sMenu = ($menu) ? 'true' : 'false';
         $sHide = ($hide) ? 'true' : 'false';
 
         if (!$this->sSemTag) {
             echo '<script>';
         }
 
-        echo "miphant.newWindow('$url', $width, $height, $sResizable, $sFrame, $sMenu, $sHide);";
+        echo "miphant.newWindow('$url', $width, $height, $sResizable, $sFrame, $sHide, '$menu');";
 
         if (!$this->sSemTag) {
             echo '</script>';

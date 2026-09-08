@@ -1,8 +1,6 @@
 <?php
-// Copyright (C) 2025-2026 Murilo Gomes Julio
-// SPDX-License-Identifier: LGPL-2.1-only
-
-// Site: https://youtube.com/@mugomesoficial
+// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
+// SPDX-License-Identifier: MIT
 
 namespace MiPhantLibs\app;
 
@@ -15,8 +13,7 @@ class config {
     public function __construct()
     {
         $server = new server();
-        $env = new env();
-        $this->aConfig = json_decode(file_get_contents($server->documentroot() . '/config/config.json'), true);
+        $this->aConfig = json_decode(file_get_contents($server->documentroot() . '/config.json'), true) ?? [];
     }
 
     public function get(string ...$nomes):string|int|bool {

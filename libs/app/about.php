@@ -1,14 +1,11 @@
 <?php
-// Copyright (C) 2025-2026 Murilo Gomes Julio
-// SPDX-License-Identifier: LGPL-2.1-only
-
-// Site: https://youtube.com/@mugomesoficial
+// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
+// SPDX-License-Identifier: MIT
 
 namespace MiPhantLibs\app;
 
 use MiPhantLibs\langs\translate;
 use MiPhantLibs\system\server;
-use MiPhantTPL\MiPhantTPL;
 
 class about
 {
@@ -21,41 +18,13 @@ class about
 
     public function setLicense(string $name, string $text): string
     {
-        $html = new MiPhantTPL();
+        $safeText = nl2br(str_replace(['<', '>', ' '], ['&lt;', '&gt;', '&nbsp;'], $text));
 
-        $styleButton = 'background-color: #79b7c8;
-        color: #003470;
-        cursor: pointer;
-        padding: 18px;
-        width: 97%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
-        font-weight: bold;
-        margin-top: 7px;';
+        $txt = '<button class="collapsible" type="button">'
+            . htmlspecialchars($name) . ' (' . $this->traduzir->get('See license') . ')'
+            . '</button>';
 
-        $styleContent = 'padding: 7px 18px;
-        display: none;
-        overflow: hidden;
-        background-color: #f1f1f1;';
-
-        $txt = $html->button(
-            [
-                'class' => 'collapsible',
-                'type' => 'button',
-                'style' => $styleButton
-            ],
-            $name . ' (' . $this->traduzir->get('see license') . ')'
-        );
-
-        $txt .= $html->div(
-            [
-                'class' => 'content',
-                'style' => $styleContent
-            ],
-            nl2br(str_replace(['<', '>', ' '], ['&lt;', '&gt;', '&nbsp;'], $text))
-        );
+        $txt .= '<div class="content">' . $safeText . '</div>';
 
         return $txt;
     }
@@ -63,26 +32,19 @@ class about
     public function show($text = '')
     {
         $config = new config();
-        $html = new MiPhantTPL();
-        $txt = $html->h1($this->traduzir->get('About %s', $config->get('app', 'name')));
-        $txt .= $html->p($config->get('app', 'name') . ' ' . $config->get('app', 'version'));
-        $txt .= $html->p($this->traduzir->get('Developed by: %s', $config->get('app', 'author', 'name')));
+        $txt = '<h1>' . $this->traduzir->get('About %s', $config->get('app', 'name')) . '</h1>';
+        $txt .= '<p>' . htmlspecialchars($config->get('app', 'name') . ' ' . $config->get('app', 'version')) . '</p>';
+        $txt .= '<p>' . $this->traduzir->get('Developed by: %s', $config->get('app', 'author', 'name')) . '</p>';
         if (!empty($config->get('app', 'author', 'organization'))) {
-            $txt .= $html->p($this->traduzir->get('Organization: %s', $config->get('app', 'author', 'organization')));
+            $txt .= '<p>' . $this->traduzir->get('Organization: %s', $config->get('app', 'author', 'organization')) . '</p>';
         }
-        $txt .= $html->p(
-            'Site: ',
-            $html->a(
-                ['href' => sprintf("javascript:miphant.openURL('%s');", $config->get('app', 'homepage'))],
-                $config->get('app', 'homepage')
-            )
-        );
-        $txt .= $html->p($config->get('app', 'copyright'));
-        $txt .= $html->p($this->traduzir->get('License: %s', $config->get('app', 'license')));
-        $txt .= $html->hr(
-            ['class' => 'border border-primary border-3 opacity-75']
-        );
-        $txt .= $html->h3($this->traduzir->get('Recursos de Terceiros Utilizados'));
+        $txt .= '<p>Site: <a href="javascript:miphant.openURL(\''
+            . htmlspecialchars($config->get('app', 'homepage')) . '\');">'
+            . htmlspecialchars($config->get('app', 'homepage')) . '</a></p>';
+        $txt .= '<p>' . htmlspecialchars($config->get('app', 'copyright')) . '</p>';
+        $txt .= '<p>' . $this->traduzir->get('License: %s', $config->get('app', 'license')) . '</p>';
+        $txt .= '<hr class="border border-primary border-3 opacity-75">';
+        $txt .= '<h3>' . $this->traduzir->get('Recursos de Terceiros Utilizados') . '</h3>';
 
         $file = new file();
         $path = new path();

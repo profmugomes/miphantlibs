@@ -16,19 +16,19 @@ MiPhantLibs is a library that makes desktop system development easier using MiPh
 
 ## Installation
 
-`composer require mugomes/miphantlibs`
+`composer require profmugomes/miphantlibs`
 
 ## Support
 
-- GitHub: https://github.com/sponsors/mugomes/
-- More: https://mugomes.github.io/apoie.html
+- GitHub: https://github.com/sponsors/profmugomes/
+- Loja: https://streamersclub.com.br/streamers/profmugomes
 
 ## License
 
 The MiPhantLibs is provided under:
 
-[SPDX-License-Identifier: LGPL-2.1-only](https://github.com/mugomes/miphantlibs/blob/main/LICENSE)
+[SPDX-License-Identifier: MIT](https://github.com/profmugomes/miphantlibs/blob/main/LICENSE)
 
-Beign under the terms of the GNU Lesser General Public License version 2.1 only.
+Being under the terms of the MIT License.
 
 All contributions to the MiPhantLibs are subject to this license.

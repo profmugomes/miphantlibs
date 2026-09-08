@@ -1,8 +1,6 @@
 <?php
-// Copyright (C) 2025-2026 Murilo Gomes Julio
-// SPDX-License-Identifier: LGPL-2.1-only
-
-// Site: https://youtube.com/@mugomesoficial
+// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
+// SPDX-License-Identifier: MIT
 
 namespace MiPhantLibs\app;
 
@@ -10,32 +8,8 @@ use MiPhantLibs\system\platform;
 
 class path {
     public function join(string ...$values):string {
-        $platform = new platform();
-        $arquivo = new file();
-        
-        $txt = '';
-        $first = true;
-
-        foreach ($values as $file) {
-            if ($platform->osLinux()) {
-                $sFile = str_replace('\\', '/', $file);
-                $txt .= ($first) ? rtrim($sFile, '/') : rtrim(ltrim($sFile, '/'), '/');
-
-                if (!$arquivo->checkExtension($txt) && substr($txt, -1) !== '/') {
-                    $txt .= '/';
-                }
-            } else {
-                $sFile = str_replace('/', '\\', $file);
-                $txt .= ($first) ? rtrim($sFile, '/') : rtrim(ltrim($sFile, '\\'), '\\');
-
-                if (!$arquivo->checkExtension($txt) && substr($txt, -1) !== '\\') {
-                    $txt .= '/';
-                }
-            }
-
-            $first = false;
-        }
-
-        return $txt;
+        return implode(DIRECTORY_SEPARATOR, array_map(function($v) {
+            return trim($v, '/\\');
+        }, $values));
     }
 }
