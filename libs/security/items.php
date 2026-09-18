@@ -6,7 +6,7 @@
 namespace MiPhantLibs\security;
 
 class items {
-    public function clean(?string $valor, int $flags = ENT_QUOTES|ENT_SUBSTITUTE, ?string $encoding = 'UTF-8', bool $double_encode = true) : string|int|null {
-        return htmlspecialchars($valor, $flags, $encoding, $double_encode);
+    public function clean(?string $value, int $flags = ENT_QUOTES|ENT_SUBSTITUTE, ?string $encoding = 'UTF-8', bool $double_encode = true) : string|int|null {
+        return htmlspecialchars($value, $flags, $encoding, $double_encode);
     }
 }
