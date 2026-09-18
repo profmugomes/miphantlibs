@@ -17,6 +17,6 @@ class server {
     }
 
     public function documentroot(): string {
-        return dirname(__FILE__, 3);
+        return dirname(__FILE__, 6);
     }
 }
