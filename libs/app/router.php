@@ -45,35 +45,51 @@ class router
         return $this->sNoPHP;
     }
 
-    public function get(string $path, mixed $function = false): bool
+    public function get(string|array $path, mixed $function = false): bool
     {
         if (!$this->isFile) {
-            $sFilename = rtrim(ltrim($path, '/'), '/');
-            $sURL = rtrim($this->url, '/');
+            $sURL = '/' . trim($this->url, '/');
+            $paths = is_array($path) ? $path : [$path];
 
-            if ($sURL == $sFilename) {
-                if (!$this->encontrado) {
-                    $this->encontrado = true;
-                    if (!is_bool($function)) {
-                        $function();
-                    }
-                    return true;
-                } else {
-                    return false;
+            foreach ($paths as $p) {
+                if ($p === '404') {
+                    continue;
                 }
-            } else {
-                if (!$this->encontrado) {
-                    if ($path == '404') {
-                        if (!is_bool($function)) {
-                            $function();
+
+                $pFormatado = '/' . trim($p, '/');
+
+                // Converte {qualquer_coisa} para uma captura de texto interna
+                // Exemplo: "/usuario/{id}" vira "^/usuario/([^/]+)$"
+                $pattern = preg_replace('/\{[a-zA-Z0-9_]+\}/', '([^/]+)', $pFormatado);
+                $pattern = '#^' . $pattern . '$#';
+
+                if (preg_match($pattern, $sURL, $matches)) {
+                    if (!$this->encontrado) {
+                        $this->encontrado = true;
+
+                        if (is_callable($function)) {
+                            // Remove o primeiro item ($matches[0] é a URL inteira)
+                            array_shift($matches);
+
+                            // Executa a função passando os valores da URL como parâmetros
+                            call_user_func_array($function, $matches);
                         }
-
                         return true;
+                    } else {
+                        return false;
                     }
                 }
-
-                return false;
             }
+
+            // Lógica para tratar Rota 404
+            if (!$this->encontrado && in_array('404', $paths, true)) {
+                if (is_callable($function)) {
+                    $function();
+                }
+                return true;
+            }
+
+            return false;
         } else {
             if ($this->arquivo->checkExtension($this->url, 'php')) {
                 return true;
