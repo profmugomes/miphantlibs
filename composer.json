@@ -8,10 +8,11 @@
             "homepage": "https://profmugomes.com.br"
         }
     ],
+    "license": "proprietary",
     "_comment": [
+        "License: Polyform Perimeter 1.0.1",
         "Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>"
     ],
-    "license": "SEE LICENSE IN LICENSE.md",
     "autoload": {
         "psr-4": {
             "MiPhantLibs\\": "libs/"
