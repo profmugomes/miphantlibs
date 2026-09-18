@@ -1,6 +1,6 @@
 {
     "name": "profmugomes/miphantlibs",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "authors": [
         {
             "name": "Murilo Gomes",
@@ -11,7 +11,7 @@
     "_comment": [
         "Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>"
     ],
-    "license": "MIT",
+    "license": "SEE LICENSE IN LICENSE.md",
     "autoload": {
         "psr-4": {
             "MiPhantLibs\\": "libs/"
