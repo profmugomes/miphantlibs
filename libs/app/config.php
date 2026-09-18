@@ -1,6 +1,7 @@
 <?php
-// Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>
-// SPDX-License-Identifier: MIT
+// Copyright (c) 2025-2026 Murilo Gomes <profmugomes.com.br>. All Rights Reserved.
+// Licensed under the PolyForm Perimeter License 1.0.1.
+// See LICENSE.md for details.
 
 namespace MiPhantLibs\app;
 
@@ -13,7 +14,7 @@ class config {
     public function __construct()
     {
         $server = new server();
-        $this->aConfig = json_decode(file_get_contents($server->documentroot() . '/config.json'), true) ?? [];
+        $this->aConfig = json_decode(file_get_contents(dirname($server->documentroot()) . '/config.json'), true) ?? [];
     }
 
     public function get(string ...$nomes):string|int|bool {
