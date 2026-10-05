@@ -1,6 +1,6 @@
 {
     "name": "profmugomes/miphantlibs",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "authors": [
         {
             "name": "Murilo Gomes",
@@ -11,7 +11,7 @@
     "license": "proprietary",
     "_comment": [
         "License: Polyform Perimeter 1.0.1",
-        "Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>"
+        "Copyright (C) 2025-2026 Murilo Gomes <profmugomes.com.br>. All Rights Reserved."
     ],
     "autoload": {
         "psr-4": {
