@@ -19,7 +19,7 @@ class about
 
     public function setLicense(string $name, string $text): string
     {
-        $safeText = nl2br(str_replace(['<', '>', ' '], ['&lt;', '&gt;', '&nbsp;'], $text));
+        $safeText = nl2br(htmlspecialchars($text, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8'));
 
         $txt = '<button class="collapsible" type="button">'
             . htmlspecialchars($name) . ' (' . $this->traduzir->get('See license') . ')'
