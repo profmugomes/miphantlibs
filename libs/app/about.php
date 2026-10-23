@@ -53,8 +53,8 @@ class about
         $base = dirname($server->documentroot(), 2);
         $phpLicense = $base . '/php/LICENSE';
 
-        $txt .= $this->setLicense('MiPhant', $file->open($base . '/LICENSE.md'));
-        $txt .= $this->setLicense('MiPhantLibs', $file->open($base . '/LICENSE.md'));
+        $txt .= $this->setLicense('MiPhant', $file->open($base . '/LICENSE'));
+        $txt .= $this->setLicense('MiPhantLibs', $file->open($base . '/LICENSE'));
 
         $electronCandidates = [
             dirname($base) . '/LICENSE.electron.txt',
